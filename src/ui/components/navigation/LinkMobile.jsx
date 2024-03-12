@@ -14,6 +14,8 @@ export default function LinkMobile() {
     <div
       className="flex flex-col pt-32 overflow-hidden items-center text-3xl gap-10 dark:bg-gray bg-gray-400 z-10 top-0 left-0 w-full h-full fixed md:hidden animation-nav"
     >
+
+
       <div className="flex items-center gap-4 absolute left-4 top-6 border-b-2 border-gray-700 pb-5">
         {isDarkMode ? <h1>Passer en mode claire</h1> : <h1>Passer en mode sombre</h1>}
 
