@@ -1,9 +1,12 @@
+import PropTypes from 'prop-types';
 import { createContext, useState } from "react";
 
 export const EditContext = createContext({
   isEdit: false,
-  toggleEdit: () => { },
+  toggleEdit: PropTypes.func,
 });
+
+EditContext.displayName = 'ConfirmContext';
 
 export const EditProvider = ({ children }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -17,4 +20,8 @@ export const EditProvider = ({ children }) => {
       {children}
     </EditContext.Provider>
   );
+};
+
+EditProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

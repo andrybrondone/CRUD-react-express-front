@@ -1,5 +1,10 @@
 import clsx from "clsx";
 import { useField } from "formik";
+import PropTypes from 'prop-types';
+
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+};
 
 export function Input({ label, ...props }) {
   const [field, meta] = useField(props)

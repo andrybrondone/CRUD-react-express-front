@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import { useContext } from "react";
 import { DarkModeContext } from "../../components/darkMode/DarkModeGlobal";
-import clsx from "clsx";
 
 export const Logo = ({ size = "medium", className }) => {
   const { isDarkMode } = useContext(DarkModeContext);

@@ -1,11 +1,14 @@
+import PropTypes from 'prop-types';
 import { createContext, useState } from "react";
 
 export const ConfirmContext = createContext({
   isOpen: false,
-  toggleOpen: () => { },
+  toggleOpen: PropTypes.func,
   isMobile: false,
-  toggleNav: () => { },
+  toggleNav: PropTypes.func,
 });
+
+ConfirmContext.displayName = 'ConfirmContext';
 
 export const ConfirmProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,4 +26,8 @@ export const ConfirmProvider = ({ children }) => {
       {children}
     </ConfirmContext.Provider>
   );
+};
+
+ConfirmProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { RiAddCircleLine, RiDeleteBin2Fill, RiPencilFill } from "react-icons/ri"
 import { ListLocationContext } from "../api/ListLocationContext"
 import { Container } from "../ui/components/container/Container"
@@ -9,35 +9,54 @@ import Formulaire from "../ui/components/modale/Formulaire"
 
 export default function Location() {
   const { toggleOpen } = useContext(ConfirmContext)
-  const { listOfLocation, showListOfLocation, showListById, listById } = useContext(ListLocationContext)
+  const { listOfLocation, showListOfLocation, showListById } = useContext(ListLocationContext)
   const { toggleEdit } = useContext(EditContext)
 
+  const [totalLoyer, setTotalLoyer] = useState(0);
+  const [maxLoyer, setMaxLoyer] = useState(Number.MIN_VALUE);
+  const [minLoyer, setMinLoyer] = useState(Number.MAX_VALUE);
+
+  // Pour afficher les données de la BD
   useEffect(() => {
     showListOfLocation()
   }, [])
 
+  // Pour supprimer les données de la BD
   const deleteLocation = (id) => {
     axios.delete(`http://localhost:3001/locations/${id}`).then(() => {
       showListOfLocation()
     })
   }
 
-  const handleClicEdit = (id) => {
-    showListById(id)
-    toggleOpen()
-    toggleEdit()
-  }
-  console.log(listById);
+  // Pour faire apparaitre la formulaire et pour recuperer les données cliquer par l'utilisateur
+  const handleClicEdit = async (id) => {
+    await showListById(id);
+    toggleOpen();
+    toggleEdit();
+  };
 
-  // const useTotal = (data) => {
-  //   const total = data.reduce((total, item) => total + item, 0)
-  //   return total
-  // }
+  // Calculer total, max, and min pour chauque loyer
+  useEffect(() => {
+    let total = 0;
+    let max = Number.MIN_VALUE;
+    let min = Number.MAX_VALUE;
+
+    listOfLocation.forEach((value) => {
+      const loyer = value.nb_jours * value.taux_journalier;
+      total += loyer;
+      max = Math.max(max, loyer);
+      min = Math.min(min, loyer);
+    });
+
+    setTotalLoyer(total);
+    setMaxLoyer(max);
+    setMinLoyer(min);
+  }, [listOfLocation]);
 
   return (
     <Container className="font-medium">
       <button className="rounded-full text-5xl text-secondary dark:text-dark-secondary dark:hover:shadow-5xl anim-transition" onClick={toggleOpen} ><RiAddCircleLine /></button>
-      <div className="h-[380px] overflow-y-auto scroll">
+      <div className="h-[380px] overflow-y-auto scroll border border-gray-400 rounded dark:border-gray-800/50">
         <table className="w-full max-sm:text-caption4">
           <thead>
             <tr className=" bg-gray/50 dark:bg-black text-white text-sm max-md:text-caption1 max-sm:text-caption4" >
@@ -67,6 +86,11 @@ export default function Location() {
             })}
           </tbody>
         </table>
+      </div>
+      <div className="mt-5">
+        <div>Total Loyer: {totalLoyer}</div>
+        <div>Maximal Loyer: {maxLoyer}</div>
+        <div>Minimal Loyer: {minLoyer}</div>
       </div>
       <Formulaire />
     </Container>

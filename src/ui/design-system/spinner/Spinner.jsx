@@ -1,12 +1,13 @@
 import clsx from "clsx";
+import PropTypes from 'prop-types';
 
-interface Props {
-  size?: "small" | "medium" | "large";
-  variant?: "primary" | "white";
-}
+Spinner.propTypes = {
+  size: PropTypes.string,
+  variant: PropTypes.string,
+};
 
-export const Spinner = ({ size = "medium", variant = "primary" }: Props) => {
-  let variantStyle: String, sizeStyle: string;
+export const Spinner = ({ size = "medium", variant = "primary" }) => {
+  let variantStyle, sizeStyle;
 
   switch (size) {
     case "small":

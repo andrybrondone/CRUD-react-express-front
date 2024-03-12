@@ -1,6 +1,14 @@
 import clsx from "clsx";
+import PropTypes from 'prop-types';
 import { useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+
+ActiveLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 export default function ActiveLink({ href, children, className, onClick }) {
   const location = useLocation();
