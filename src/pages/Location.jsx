@@ -87,10 +87,10 @@ export default function Location() {
           </tbody>
         </table>
       </div>
-      <div className="mt-5">
-        <div>Total Loyer: {totalLoyer}</div>
-        <div>Maximal Loyer: {maxLoyer}</div>
-        <div>Minimal Loyer: {minLoyer}</div>
+      <div className="mt-5 space-y-3">
+        <p>Total Loyer : {totalLoyer} <sup className="font-bold">MGA</sup></p>
+        <p>Maximal Loyer : {maxLoyer} <sup className="font-bold">MGA</sup></p>
+        <p>Minimal Loyer : {minLoyer} <sup className="font-bold">MGA</sup></p>
       </div>
       <Formulaire />
     </Container>

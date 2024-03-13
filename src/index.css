@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scrollbar-width: none;
+}
+
 .scroll {
   scrollbar-width: thin;
 }
@@ -57,9 +61,4 @@ body {
   to {
     left: 0;
   }
-}
-
-/* Styles personnalisés pour la scrollbar */
-::-webkit-scrollbar {
-  display: none;
 }

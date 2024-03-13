@@ -64,13 +64,24 @@ export default function Formulaire() {
     taux_journalier: Yup.number().positive("Nombre positif uniquement").label("Taux journalier").required("Ce champ est obligatoire"),
   })
 
-  // Fonction pour envoyer les données dans le formulaire
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/locations", data).then(() => {
-      toggleOpen()
-      showListOfLocation()
-    })
-  }
+    if (isEdit) {
+      // Update existing location
+      axios.put(`http://localhost:3001/locations/${listById.id}`, data).then(() => {
+        toggleOpen();
+        toggleEdit()
+        showListOfLocation();
+      });
+    } else {
+      // Add new location
+      axios.post("http://localhost:3001/locations", data).then(() => {
+        toggleOpen();
+        showListOfLocation();
+      });
+    }
+  };
+
+
 
   return (
     <>
@@ -133,7 +144,9 @@ export default function Formulaire() {
                 </div>
                 {
                   isEdit
-                    ? <button type="submit" className="bg-secondary text-white py-3 rounded hover:bg-secondary-600 anim-transition">Modifier</button>
+                    ? <button
+                      type="submit"
+                      className="bg-secondary text-white py-3 rounded hover:bg-secondary-600 anim-transition">Modifier</button>
                     : <button type="submit" className="bg-secondary text-white py-3 rounded hover:bg-secondary-600 anim-transition">Ajouter</button>
                 }
 
