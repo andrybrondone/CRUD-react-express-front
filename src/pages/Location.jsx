@@ -1,10 +1,11 @@
 import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { RiAddCircleLine, RiDeleteBin2Fill, RiPencilFill } from "react-icons/ri"
 import { ListLocationContext } from "../api/ListLocationContext"
+import { ConfirmContext } from "../context/ConfirmContext"
+import { EditContext } from "../context/EditContext"
+import { StatContext } from "../context/StatContext"
 import { Container } from "../ui/components/container/Container"
-import { ConfirmContext } from "../ui/components/modale/ConfirmContext"
-import { EditContext } from "../ui/components/modale/EditContext"
 import Formulaire from "../ui/components/modale/Formulaire"
 
 export default function Location() {
@@ -12,9 +13,7 @@ export default function Location() {
   const { listOfLocation, showListOfLocation, showListById } = useContext(ListLocationContext)
   const { toggleEdit } = useContext(EditContext)
 
-  const [totalLoyer, setTotalLoyer] = useState(0);
-  const [maxLoyer, setMaxLoyer] = useState(Number.MIN_VALUE);
-  const [minLoyer, setMinLoyer] = useState(Number.MAX_VALUE);
+  const { totalLoyer, maxLoyer, minLoyer } = useContext(StatContext)
 
   // Pour afficher les données de la BD
   useEffect(() => {
@@ -34,24 +33,6 @@ export default function Location() {
     toggleOpen();
     toggleEdit();
   };
-
-  // Calculer total, max, and min pour chauque loyer
-  useEffect(() => {
-    let total = 0;
-    let max = Number.MIN_VALUE;
-    let min = Number.MAX_VALUE;
-
-    listOfLocation.forEach((value) => {
-      const loyer = value.nb_jours * value.taux_journalier;
-      total += loyer;
-      max = Math.max(max, loyer);
-      min = Math.min(min, loyer);
-    });
-
-    setTotalLoyer(total);
-    setMaxLoyer(max);
-    setMinLoyer(min);
-  }, [listOfLocation]);
 
   return (
     <Container className="font-medium">

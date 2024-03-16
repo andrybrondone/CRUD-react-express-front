@@ -1,0 +1,47 @@
+import PropTypes from 'prop-types';
+import { createContext, useContext, useEffect, useState } from "react";
+import { ListLocationContext } from '../api/ListLocationContext';
+
+export const StatContext = createContext({
+  isOpen: false,
+  toggleOpen: PropTypes.func,
+  isMobile: false,
+  toggleNav: PropTypes.func,
+});
+
+StatContext.displayName = 'StatContext';
+
+export const StatProvider = ({ children }) => {
+  const { listOfLocation } = useContext(ListLocationContext)
+
+  const [totalLoyer, setTotalLoyer] = useState(0);
+  const [maxLoyer, setMaxLoyer] = useState(Number.MIN_VALUE);
+  const [minLoyer, setMinLoyer] = useState(Number.MAX_VALUE);
+
+  useEffect(() => {
+    let total = 0;
+    let max = Number.MIN_VALUE;
+    let min = Number.MAX_VALUE;
+
+    listOfLocation.forEach((value) => {
+      const loyer = value.nb_jours * value.taux_journalier;
+      total += loyer;
+      max = Math.max(max, loyer);
+      min = Math.min(min, loyer);
+    });
+
+    setTotalLoyer(total);
+    setMaxLoyer(max);
+    setMinLoyer(min);
+  }, [listOfLocation]);
+
+  return (
+    <StatContext.Provider value={{ totalLoyer, maxLoyer, minLoyer }}>
+      {children}
+    </StatContext.Provider>
+  );
+};
+
+StatProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

@@ -14,7 +14,7 @@ export const Home = () => {
           </h1>
           <div>
             <p
-              className="max-w-xl text-justify max-md:text-center text-sm max-lg:text-caption2 text-gray dark:text-gray-500"
+              className="max-w-xl max-md:text-center text-sm max-lg:text-caption2 text-gray dark:text-gray-500"
             >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
               reiciendis iure nostrum pariatur doloribus totam error quis cumque

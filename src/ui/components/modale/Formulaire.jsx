@@ -4,9 +4,9 @@ import { useContext, useEffect } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import * as Yup from "yup";
 import { ListLocationContext } from "../../../api/ListLocationContext";
+import { ConfirmContext } from "../../../context/ConfirmContext";
+import { EditContext } from "../../../context/EditContext";
 import { Input } from "../form/Input";
-import { ConfirmContext } from "./ConfirmContext";
-import { EditContext } from "./EditContext";
 
 export default function Formulaire() {
   const { isOpen, toggleOpen } = useContext(ConfirmContext);

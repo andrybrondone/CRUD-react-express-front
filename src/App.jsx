@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Histogramme from "./pages/Histogramme";
 import { Home } from "./pages/Home";
 import Location from "./pages/Location";
 import Page404 from "./pages/Page404";
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'histogramme',
-        element: <div>histogramme</div>
+        element: <Histogramme />
       },
       {
         path: '*',

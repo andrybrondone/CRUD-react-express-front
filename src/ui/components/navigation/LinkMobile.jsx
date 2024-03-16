@@ -1,49 +1,55 @@
 import { useContext } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { RiCloseCircleFill } from "react-icons/ri";
+import { ConfirmContext } from "../../../context/ConfirmContext";
 import { DarkModeContext } from "../darkMode/DarkModeGlobal";
 import { ToggleBtn } from "../darkMode/ToggleBtn";
-import { ConfirmContext } from "../modale/ConfirmContext";
 import ActiveLink from "./ActiveLink";
 
 export default function LinkMobile() {
   const { toggleNav } = useContext(ConfirmContext)
   const { isDarkMode } = useContext(DarkModeContext);
 
+  const clickMenuBurger = () => {
+    const menutoggel = document.getElementById("menuBurger")
+    menutoggel.classList.toggle('active')
+
+    toggleNav()
+
+  }
+
   return (
-    <div
-      className="flex flex-col pt-32 overflow-hidden items-center text-3xl gap-10 dark:bg-gray bg-gray-400 z-10 top-0 left-0 w-full h-full fixed md:hidden animation-nav"
-    >
+    <>
+      <div className="anim-transition absolute top-[75px] left-0 w-full h-[100vh] z-50" onClick={clickMenuBurger}></div>
 
+      <div className="bg-gray-300/60 backdrop-blur-sm shadow-lg dark:bg-black/60 dark-transition absolute top-[75px] rounded flex flex-col items-center gap-6 py-6 px-10 anim-transition w-full z-50">
 
-      <div className="flex items-center gap-4 absolute left-4 top-6 border-b-2 border-gray-700 pb-5">
-        {isDarkMode ? <h1>Passer en mode claire</h1> : <h1>Passer en mode sombre</h1>}
+        <div className="flex items-center gap-4 border-b-2 border-gray-700 pb-4">
+          {isDarkMode ? <h1>Passer en mode claire</h1> : <h1>Passer en mode sombre</h1>}
 
-        <ToggleBtn />
+          <ToggleBtn />
+        </div>
+
+        <ActiveLink
+          href="/"
+          className="flex items-center"
+          onClick={clickMenuBurger}
+        >
+          <AiOutlineHome className="relative bottom-[1px] right-1" />
+          Accueil
+        </ActiveLink>
+        <ActiveLink
+          href="/locations"
+          onClick={clickMenuBurger}
+        >
+          Locations
+        </ActiveLink>
+        <ActiveLink
+          href="/histogramme"
+          onClick={clickMenuBurger}
+        >
+          Histogramme
+        </ActiveLink>
       </div>
-      <ActiveLink
-        href="/"
-        className="flex items-center"
-        onClick={toggleNav}
-      >
-        <AiOutlineHome className="relative bottom-[1px] right-1" />
-        Accueil
-      </ActiveLink>
-      <ActiveLink
-        href="/locations"
-        onClick={toggleNav}
-      >
-        Locations
-      </ActiveLink>
-      <ActiveLink
-        href="/histogramme"
-        onClick={toggleNav}
-      >
-        Histogramme
-      </ActiveLink>
-      <div className="absolute right-4 top-7 text-4xl text-gray-700 dark:text-white">
-        <RiCloseCircleFill onClick={toggleNav} />
-      </div>
-    </div>
+    </>
   )
 }
