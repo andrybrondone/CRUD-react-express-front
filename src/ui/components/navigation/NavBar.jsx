@@ -13,9 +13,7 @@ export default function NavBar() {
   const clickMenuBurger = () => {
     const menutoggel = document.getElementById("menuBurger")
     menutoggel.classList.toggle('active')
-
     toggleNav()
-
   }
 
   return (

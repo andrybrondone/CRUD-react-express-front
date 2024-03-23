@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ConfirmContext } from "./context/ConfirmContext";
 import Histogramme from "./pages/Histogramme";
 import { Home } from "./pages/Home";
 import Location from "./pages/Location";
@@ -35,9 +36,10 @@ const router = createBrowserRouter([
 
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
+  const { isMobile } = useContext(ConfirmContext);
 
   return (
-    <div className={clsx(isDarkMode && "dark")}>
+    <div className={clsx(isDarkMode && "dark", isMobile && "fixed")}>
       <div className="min-h-[100vh] dark:bg-gray dark-transition dark:text-white">
         <RouterProvider router={router} />
       </div>

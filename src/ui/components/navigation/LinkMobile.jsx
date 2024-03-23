@@ -21,7 +21,7 @@ export default function LinkMobile() {
     <>
       <div className="anim-transition absolute top-[75px] left-0 w-full h-[100vh] z-50" onClick={clickMenuBurger}></div>
 
-      <div className="bg-gray-300/60 backdrop-blur-sm shadow-lg dark:bg-black/60 dark-transition absolute top-[75px] rounded flex flex-col items-center gap-6 py-6 px-10 anim-transition w-full z-50">
+      <div className="bg-gray-300/60 backdrop-blur-sm shadow-lg dark:bg-black/60 dark-transition absolute top-[75px] rounded flex flex-col items-center gap-6 py-6 px-10 anim-transition w-full z-50 animation-nav">
 
         <div className="flex items-center gap-4 border-b-2 border-gray-700 pb-4">
           {isDarkMode ? <h1>Passer en mode claire</h1> : <h1>Passer en mode sombre</h1>}

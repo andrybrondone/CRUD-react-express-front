@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import Chart from 'react-apexcharts';
+import StatImg from "../assets/stat.png";
 import { StatContext } from '../context/StatContext';
 
 export default function Histogramme() {
@@ -25,6 +26,7 @@ export default function Histogramme() {
   return (
     <div className="flex justify-center items-center -z-50">
       <Chart options={chartOptions} series={chartSeries} type="bar" width={500} height={320} />
+      <img src={StatImg} alt="" className="w-[500px]" />
     </div>
   );
 }
