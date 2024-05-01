@@ -38,8 +38,8 @@ export default {
       },
       alert: {
         danger: "#FF4E4E",
-        success: "#90DA1A",
-        warning: "orange",
+        success: "#16BF16",
+        warning: "#FEB72F",
       },
     },
 

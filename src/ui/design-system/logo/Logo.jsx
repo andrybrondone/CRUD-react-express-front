@@ -1,8 +1,14 @@
 import clsx from "clsx";
+import PropTypes from 'prop-types';
 import { useContext } from "react";
 import { DarkModeContext } from "../../components/darkMode/DarkModeGlobal";
 
-export const Logo = ({ size = "medium", className }) => {
+Logo.propTypes = {
+  size: PropTypes.string,
+  className: PropTypes.string
+};
+
+export default function Logo({ size, className }) {
   const { isDarkMode } = useContext(DarkModeContext);
 
   let sizeLogo;
@@ -135,4 +141,5 @@ export const Logo = ({ size = "medium", className }) => {
       </svg>
     </div>
   );
-};
+}
+

@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import logoVoiture from "../../../assets/logo-voiture.svg";
 import { ConfirmContext } from "../../../context/ConfirmContext";
-import { Logo } from "../../design-system/logo/Logo";
 import { Container } from "../container/Container";
 import { ToggleBtn } from "../darkMode/ToggleBtn";
 import Link from "./Link";
 import LinkMobile from "./LinkMobile";
+import Logo from "../../design-system/logo/Logo";
 
 export default function NavBar() {
   const { isMobile, toggleNav } = useContext(ConfirmContext)
@@ -22,7 +22,7 @@ export default function NavBar() {
         <div className="flex items-center gap-2.5">
           <div>
             <h2
-              className="text-gray font-bold flex items-center gap-1 dark:text-white"
+              className="text-gray font-bold text-caption1 flex items-center gap-1 dark:text-white"
             >
               <img src={logoVoiture} alt="logo voiture" className="w-[50px]" />
 

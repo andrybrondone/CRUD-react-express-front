@@ -25,8 +25,8 @@ export default function Histogramme() {
 
   return (
     <div className="flex justify-center items-center -z-50">
-      <Chart options={chartOptions} series={chartSeries} type="bar" width={500} height={320} />
-      <img src={StatImg} alt="" className="w-[500px]" />
+      <Chart options={chartOptions} series={chartSeries} type="bar" height={320} className="w-[500px] max-sm:w-[400]" />
+      <img src={StatImg} alt="" className="w-[500px] max-lg:hidden" />
     </div>
   );
 }

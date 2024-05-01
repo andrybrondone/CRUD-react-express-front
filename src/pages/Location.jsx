@@ -6,6 +6,7 @@ import { ConfirmContext } from "../context/ConfirmContext"
 import { EditContext } from "../context/EditContext"
 import { StatContext } from "../context/StatContext"
 import { Container } from "../ui/components/container/Container"
+import Loyer from "../ui/components/loyer/Loyer"
 import Formulaire from "../ui/components/modale/Formulaire"
 
 export default function Location() {
@@ -68,10 +69,10 @@ export default function Location() {
           </tbody>
         </table>
       </div>
-      <div className="mt-5 space-y-3">
-        <p>Total Loyer : {totalLoyer} <sup className="font-bold">MGA</sup></p>
-        <p>Maximal Loyer : {maxLoyer} <sup className="font-bold">MGA</sup></p>
-        <p>Minimal Loyer : {minLoyer} <sup className="font-bold">MGA</sup></p>
+      <div className="flex justify-between gap-2 mt-5 max-sm:flex-col">
+        <Loyer label={`Total Loyer : ${totalLoyer} `} unity="MGA" className="border-alert-success text-alert-success" />
+        <Loyer label={`Minimal Loyer : ${minLoyer} `} unity="MGA" className="border-alert-warning text-alert-warning" />
+        <Loyer label={`Maximal Loyer : ${maxLoyer} `} unity="MGA" className="border-alert-danger text-alert-danger" />
       </div>
       <Formulaire />
     </Container>
