@@ -1,11 +1,6 @@
 import clsx from "clsx";
 import PropTypes from 'prop-types';
 
-Spinner.propTypes = {
-  size: PropTypes.string,
-  variant: PropTypes.string,
-};
-
 export const Spinner = ({ size = "medium", variant = "primary" }) => {
   let variantStyle, sizeStyle;
 
@@ -54,4 +49,9 @@ export const Spinner = ({ size = "medium", variant = "primary" }) => {
       ></path>
     </svg>
   );
+};
+
+Spinner.propTypes = {
+  size: PropTypes.string,
+  variant: PropTypes.string,
 };

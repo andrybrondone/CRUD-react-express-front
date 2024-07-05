@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Form, Formik } from "formik";
+import PropTypes from 'prop-types';
 import { useContext, useEffect } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import * as Yup from "yup";
@@ -9,9 +10,10 @@ import { EditContext } from "../../../context/EditContext";
 import { url_api } from "../../../utils/url_api";
 import { Input } from "../form/Input";
 
-export default function Formulaire() {
+
+export default function Formulaire({ refetch }) {
   const { isOpen, toggleOpen } = useContext(ConfirmContext);
-  const { showListOfLocation, listById } = useContext(ListLocationContext)
+  const { listById } = useContext(ListLocationContext)
   const { isEdit, toggleEdit } = useContext(EditContext)
 
   let initialValues = {}
@@ -71,13 +73,13 @@ export default function Formulaire() {
       axios.put(`${url_api}/locations/${listById.id}`, data).then(() => {
         toggleOpen();
         toggleEdit()
-        showListOfLocation();
+        refetch()
       });
     } else {
       // Add new location
       axios.post(`${url_api}/locations`, data).then(() => {
         toggleOpen();
-        showListOfLocation();
+        refetch();
       });
     }
   };
@@ -161,3 +163,7 @@ export default function Formulaire() {
     </>
   )
 }
+
+Formulaire.propTypes = {
+  refetch: PropTypes.func,
+};
