@@ -1,6 +1,7 @@
 import axios from "axios";
 import PropTypes from 'prop-types';
 import { createContext, useState } from "react";
+import { url_api } from "../utils/url_api";
 
 export const ListLocationContext = createContext({
   listOfLocation: [],
@@ -16,13 +17,13 @@ export const ListLocationProvider = ({ children }) => {
   const [listById, setListById] = useState({});
 
   const showListOfLocation = () => {
-    axios.get("http://localhost:3001/locations").then((response) => {
+    axios.get(`${url_api}/locations`).then((response) => {
       setListOfLocation(response.data);
     });
   };
 
   const showListById = (id) => {
-    return axios.get(`http://localhost:3001/locations/byId/${id}`).then((response) => {
+    return axios.get(`${url_api}/locations/byId/${id}`).then((response) => {
       setListById(response.data);
     });
   };

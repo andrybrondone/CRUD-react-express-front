@@ -22,7 +22,9 @@ export function Input({ label, ...props }) {
           "p-3 font-light border rounded focus:outline-none focus:ring-1 dark:text-primary-200 dark:bg-gray-800 placeholder-gray-700 dark:placeholder-primary-300"
         )}
       />
-      {meta.touched && meta.error && <div className="text-alert-danger">{meta.error}</div>}
+      <div className="h-3">
+        {meta.touched && meta.error && <div className="text-alert-danger text-caption4">{meta.error}</div>}
+      </div>
     </>
   )
 }

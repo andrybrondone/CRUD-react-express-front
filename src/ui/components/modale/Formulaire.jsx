@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { ListLocationContext } from "../../../api/ListLocationContext";
 import { ConfirmContext } from "../../../context/ConfirmContext";
 import { EditContext } from "../../../context/EditContext";
+import { url_api } from "../../../utils/url_api";
 import { Input } from "../form/Input";
 
 export default function Formulaire() {
@@ -58,7 +59,7 @@ export default function Formulaire() {
 
   // Validation des données dans le formulaire
   const validationSchema = Yup.object().shape({
-    nom_loc: Yup.string().required("Ce champ est obligatoire"),
+    nom_loc: Yup.string().min(3, "Minimum 3 caractères").max("90", "Veuillez raccourcir un le nom").required("Ce champ est obligatoire"),
     design_voiture: Yup.string().required("Ce champ est obligatoire"),
     nb_jours: Yup.number().positive("Nombre positif uniquement").integer("Entrez un nombre entier").required("Ce champ est obligatoire"),
     taux_journalier: Yup.number().positive("Nombre positif uniquement").label("Taux journalier").required("Ce champ est obligatoire"),
@@ -67,14 +68,14 @@ export default function Formulaire() {
   const onSubmit = (data) => {
     if (isEdit) {
       // Update existing location
-      axios.put(`http://localhost:3001/locations/${listById.id}`, data).then(() => {
+      axios.put(`${url_api}/locations/${listById.id}`, data).then(() => {
         toggleOpen();
         toggleEdit()
         showListOfLocation();
       });
     } else {
       // Add new location
-      axios.post("http://localhost:3001/locations", data).then(() => {
+      axios.post(`${url_api}/locations`, data).then(() => {
         toggleOpen();
         showListOfLocation();
       });
@@ -102,7 +103,7 @@ export default function Formulaire() {
 
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
               <Form className="flex flex-col gap-1">
-                <div className="flex flex-col gap1 mb-4">
+                <div className="flex flex-col gap1">
                   <Input
                     label="Nom du locataire"
                     name="nom_loc"
@@ -112,7 +113,7 @@ export default function Formulaire() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-1 mb-4">
+                <div className="flex flex-col gap-1">
                   <Input
                     label="Designation de la voiture"
                     name="design_voiture"
@@ -122,7 +123,7 @@ export default function Formulaire() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-1 mb-4">
+                <div className="flex flex-col gap-1">
                   <Input
                     label="Nombre de jours"
                     name="nb_jours"
@@ -133,7 +134,7 @@ export default function Formulaire() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-1 mb-4">
+                <div className="flex flex-col gap-1 mb-5">
                   <Input
                     label="Taux journalier"
                     name="taux_journalier"

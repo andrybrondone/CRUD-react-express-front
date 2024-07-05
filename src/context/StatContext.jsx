@@ -23,12 +23,17 @@ export const StatProvider = ({ children }) => {
     let max = Number.MIN_VALUE;
     let min = Number.MAX_VALUE;
 
-    listOfLocation.forEach((value) => {
-      const loyer = value.nb_jours * value.taux_journalier;
-      total += loyer;
-      max = Math.max(max, loyer);
-      min = Math.min(min, loyer);
-    });
+    if (listOfLocation.length > 0) {
+      listOfLocation.forEach((value) => {
+        const loyer = value.nb_jours * value.taux_journalier;
+        total += loyer;
+        max = Math.max(max, loyer);
+        min = Math.min(min, loyer);
+      });
+    } else {
+      max = 0;
+      min = 0;
+    }
 
     setTotalLoyer(total);
     setMaxLoyer(max);

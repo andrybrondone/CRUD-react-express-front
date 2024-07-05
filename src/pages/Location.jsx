@@ -8,6 +8,7 @@ import { StatContext } from "../context/StatContext"
 import { Container } from "../ui/components/container/Container"
 import Loyer from "../ui/components/loyer/Loyer"
 import Formulaire from "../ui/components/modale/Formulaire"
+import { url_api } from "../utils/url_api"
 
 export default function Location() {
   const { toggleOpen } = useContext(ConfirmContext)
@@ -23,7 +24,7 @@ export default function Location() {
 
   // Pour supprimer les données de la BD
   const deleteLocation = (id) => {
-    axios.delete(`http://localhost:3001/locations/${id}`).then(() => {
+    axios.delete(`${url_api}/locations/${id}`).then(() => {
       showListOfLocation()
     })
   }
