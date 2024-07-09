@@ -1,6 +1,7 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import { createContext, useContext, useEffect, useState } from "react";
-import { ListLocationContext } from '../api/ListLocationContext';
+import { createContext, useEffect, useState } from "react";
+import { url_api } from '../utils/url_api';
 
 export const StatContext = createContext({
   isOpen: false,
@@ -12,7 +13,14 @@ export const StatContext = createContext({
 StatContext.displayName = 'StatContext';
 
 export const StatProvider = ({ children }) => {
-  const { listOfLocation } = useContext(ListLocationContext)
+  const [listOfLocation, setListOfLocation] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${url_api}/locations`).then((response) => {
+      setListOfLocation(response.data);
+    });
+  }, [])
+
 
   const [totalLoyer, setTotalLoyer] = useState(0);
   const [maxLoyer, setMaxLoyer] = useState(Number.MIN_VALUE);

@@ -46,7 +46,7 @@ export const Button = ({
 
     case "secondary":
       variantStyle =
-        "text-primary dark:text-primary-300 hover:bg-primary-400 dark:hover:bg-primary-400 dark:hover:text-white hover:text-white rounded border border-primary dark:border-primary-300 dark:hover:border-primary-400";
+        "text-secondary dark:text-secondary-400 hover:bg-secondary-400 dark:hover:bg-secondary dark:hover:text-white hover:text-white rounded border border-secondary dark:border-secondary-400 dark:hover:border-secondary";
       break;
 
     case "warning":

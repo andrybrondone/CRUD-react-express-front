@@ -1,25 +1,23 @@
-import axios from "axios"
-import { useContext } from "react"
-import { RiAddCircleLine, RiDeleteBin2Fill, RiPencilFill } from "react-icons/ri"
-import { ListLocationContext } from "../api/ListLocationContext"
-import { ConfirmContext } from "../context/ConfirmContext"
-import { EditContext } from "../context/EditContext"
-import { StatContext } from "../context/StatContext"
-import { useDataFetcher } from "../hooks/useDataFetcher"
-import { ButtonPagination } from "../ui/components/button-pagination/ButtonPagination"
-import { Container } from "../ui/components/container/Container"
-import DataEmpty from "../ui/components/data-empty/DataEmpty"
-import Loyer from "../ui/components/loyer/Loyer"
-import Formulaire from "../ui/components/modale/Formulaire"
-import { Spinner } from "../ui/design-system/spinner/Spinner"
-import { url_api } from "../utils/url_api"
+import axios from "axios";
+import { useContext, useEffect } from "react";
+import { RiAddCircleLine, RiDeleteBin2Fill, RiPencilFill } from "react-icons/ri";
+import { ListLocationContext } from "../api/ListLocationContext";
+import { ConfirmContext } from "../context/ConfirmContext";
+import { EditContext } from "../context/EditContext";
+import { useDataFetcher } from "../hooks/useDataFetcher";
+import useGetStatistique from "../hooks/useGetStatistique";
+import { ButtonPagination } from "../ui/components/button-pagination/ButtonPagination";
+import { Container } from "../ui/components/container/Container";
+import DataEmpty from "../ui/components/data-empty/DataEmpty";
+import Loyer from "../ui/components/loyer/Loyer";
+import Formulaire from "../ui/components/modale/Formulaire";
+import { Spinner } from "../ui/design-system/spinner/Spinner";
+import { url_api } from "../utils/url_api";
 
 export default function Location() {
-  const { toggleOpen } = useContext(ConfirmContext)
-  const { showListOfLocation, showListById } = useContext(ListLocationContext)
-  const { toggleEdit } = useContext(EditContext)
-
-  const { totalLoyer, maxLoyer, minLoyer } = useContext(StatContext)
+  const { toggleOpen } = useContext(ConfirmContext);
+  const { showListById } = useContext(ListLocationContext);
+  const { toggleEdit } = useContext(EditContext);
 
   const {
     isLoading,
@@ -34,19 +32,24 @@ export default function Location() {
     processData: (data) => data.locations,
   });
 
-  // Pour supprimer les données de la BD
+  const { minLoyer, maxLoyer, totalLoyer, fetchStatistics } = useGetStatistique(refetch);
+
   const deleteLocation = (id) => {
     axios.delete(`${url_api}/locations/${id}`).then(() => {
-      showListOfLocation()
-    })
-  }
+      refetch();
+      fetchStatistics();
+    });
+  };
 
-  // Pour faire apparaitre la formulaire et pour recuperer les données cliquer par l'utilisateur
   const handleClicEdit = async (id) => {
     await showListById(id);
     toggleOpen();
     toggleEdit();
   };
+
+  useEffect(() => {
+    fetchStatistics();
+  }, [refetch]);
 
   if (isLoading)
     return (
@@ -115,12 +118,12 @@ export default function Location() {
       )}
 
       <div className="flex justify-between gap-2 mt-12 max-sm:flex-col">
-        <Loyer label={`Total Loyer : ${totalLoyer} `} unity="MGA" className="border-alert-success text-alert-success" />
-        <Loyer label={`Minimal Loyer : ${minLoyer} `} unity="MGA" className="border-alert-warning text-alert-warning" />
-        <Loyer label={`Maximal Loyer : ${maxLoyer} `} unity="MGA" className="border-alert-danger text-alert-danger" />
+        <Loyer label={`Total des Loyer : ${totalLoyer} `} unity="MGA" className="border-alert-success text-alert-success" />
+        <Loyer label={`Loyer Minimal : ${minLoyer} `} unity="MGA" className="border-alert-warning text-alert-warning" />
+        <Loyer label={`Loyer Maximal : ${maxLoyer} `} unity="MGA" className="border-alert-danger text-alert-danger" />
       </div>
 
-      <Formulaire refetch={refetch} />
+      <Formulaire refetch={refetch} fetchStatistics={fetchStatistics} />
     </Container>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import PropTypes from 'prop-types';
 
-export const Spinner = ({ size = "medium", variant = "primary" }) => {
+export const Spinner = ({ size = "medium", variant = "secondary" }) => {
   let variantStyle, sizeStyle;
 
   switch (size) {
@@ -17,8 +17,8 @@ export const Spinner = ({ size = "medium", variant = "primary" }) => {
   }
 
   switch (variant) {
-    case "primary": // Default
-      variantStyle = "text-primary";
+    case "secondary": // Default
+      variantStyle = "text-secondary";
       break;
     case "white":
       variantStyle = "text-white";

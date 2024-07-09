@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { ConfirmContext } from "./context/ConfirmContext";
 import Histogramme from "./pages/Histogramme";
 import { Home } from "./pages/Home";
@@ -42,6 +43,7 @@ function App() {
     <div className={clsx(isDarkMode && "dark", isMobile && "fixed")}>
       <div className="min-h-[100vh] dark:bg-gray dark-transition dark:text-white">
         <RouterProvider router={router} />
+        <ToastContainer theme={isDarkMode ? "dark" : "light"} />
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ export function ButtonPagination({ currentPage, totalPage, onChangePage }) {
   return (
     <div className="flex items-center justify-center gap-7 mt-10">
       <Button
+        variant="secondary"
         action={() => onChangePage(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -16,6 +17,7 @@ export function ButtonPagination({ currentPage, totalPage, onChangePage }) {
       </p>
 
       <Button
+        variant="secondary"
         action={() => onChangePage(currentPage + 1)}
         disabled={!totalPage || currentPage === totalPage}
       >
