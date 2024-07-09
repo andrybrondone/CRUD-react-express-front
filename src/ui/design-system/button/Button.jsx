@@ -51,7 +51,7 @@ export const Button = ({
 
     case "warning":
       variantStyle =
-        "text-alert-warning rounded border border-alert-warning hover:bg-alert-warning hover:text-white dark:text-white dark:border-gray-700 dark:hover:shadow-darkgray";
+        "text-alert-warning rounded border border-alert-warning hover:bg-alert-warning hover:text-white dark:text-white dark:border-gray-700 dark:hover:border-alert-warning dark:hover:shadow-darkgray";
       break;
 
     case "disabled":
@@ -61,7 +61,7 @@ export const Button = ({
 
     case "outline":
       variantStyle =
-        "bg-white hover:bg-gray-400/60 border border-gray-600 text-gray-900 rounded";
+        "bg-white hover:bg-gray-400/60 border border-gray-600 text-gray-900 rounded dark:bg-gray-800 dark:text-white";
       break;
   }
 
