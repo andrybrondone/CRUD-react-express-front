@@ -6,6 +6,8 @@ export const ConfirmContext = createContext({
   toggleOpen: PropTypes.func,
   isMobile: false,
   toggleNav: PropTypes.func,
+  isConfirmDialog: false,
+  toggleConfirmDialog: PropTypes.func
 });
 
 ConfirmContext.displayName = 'ConfirmContext';
@@ -13,6 +15,7 @@ ConfirmContext.displayName = 'ConfirmContext';
 export const ConfirmProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isConfirmDialog, setIsConfirmDialog] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -21,8 +24,10 @@ export const ConfirmProvider = ({ children }) => {
     setIsMobile(!isMobile);
   };
 
+  const toggleConfirmDialog = () => setIsConfirmDialog(!isConfirmDialog);
+
   return (
-    <ConfirmContext.Provider value={{ isOpen, toggleOpen, isMobile, toggleNav }}>
+    <ConfirmContext.Provider value={{ isOpen, toggleOpen, isMobile, toggleNav, isConfirmDialog, toggleConfirmDialog }}>
       {children}
     </ConfirmContext.Provider>
   );

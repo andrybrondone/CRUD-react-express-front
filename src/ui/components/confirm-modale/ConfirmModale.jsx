@@ -1,0 +1,49 @@
+import PropTypes from 'prop-types';
+import { useContext } from "react";
+import { RiCloseFill } from "react-icons/ri";
+import { ConfirmContext } from '../../../context/ConfirmContext';
+import { Button } from '../../design-system/button/Button';
+
+export default function ConfirmModale({ message, action }) {
+  const { toggleConfirmDialog } = useContext(ConfirmContext);
+
+  return (
+    <>
+      <div
+        className="anim-transition top-0 left-0 w-full h-[100vh] bg-gray/10 fixed z-20"
+        onClick={toggleConfirmDialog}
+      ></div>
+
+      <div className="fixed w-[450px] max-[500px]:w-[90%] top-40 left-1/2 -translate-x-1/2  bg-white dark:bg-gray rounded shadow-xl py-6 px-9 z-50">
+        <RiCloseFill
+          className="text-xl bg-gray-500 rounded-full absolute top-2 right-2 cursor-pointer dark:bg-gray-800"
+          onClick={toggleConfirmDialog}
+        />
+        <div className="flex flex-col gap-5">
+          <h3
+            className="font-semibold text-alert-warning text-6xl max-lg:text-5xl max-sm:text-4xl"
+          >
+            Attention
+          </h3>
+          <p className="text-sm max-lg:text-caption1 max-sm:text-caption2">
+            {message}
+          </p>
+
+          <div className="flex gap-4 justify-end mt-4">
+            <Button variant="warning" action={action}>
+              Oui
+            </Button>
+            <Button variant="outline" action={toggleConfirmDialog}>
+              Non
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+ConfirmModale.propTypes = {
+  message: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
+};

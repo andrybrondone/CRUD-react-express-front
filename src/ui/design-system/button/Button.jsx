@@ -58,6 +58,11 @@ export const Button = ({
       variantStyle =
         "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed dark:bg-gray-700 dark:border-gray-600/20 dark:text-white/50";
       break;
+
+    case "outline":
+      variantStyle =
+        "bg-white hover:bg-gray-400/60 border border-gray-600 text-gray-900 rounded";
+      break;
   }
 
   switch (
@@ -141,6 +146,7 @@ Button.propTypes = {
     "secondary",
     "disabled",
     "warning",
+    "outline"
   ]),
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,

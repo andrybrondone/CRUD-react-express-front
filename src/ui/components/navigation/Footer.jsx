@@ -17,13 +17,13 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center justify-end gap-3 text-3xl text-white">
-            <a href="#" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
+            <a href="https://facebook.com/bron.don.714" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
               <RiFacebookCircleFill />
             </a>
-            <a href="#" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
+            <a href="https://github.com/andrybrondone" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
               <RiGithubFill />
             </a>
-            <a href="#" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
+            <a href="https://linkedin.com/in/brondone-andriambololomanana" target="_blank" className="bg-gray-800 p-3 rounded-full hover:shadow-4xl anim-transition">
               <RiLinkedinFill />
             </a>
           </div>

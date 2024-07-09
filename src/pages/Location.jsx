@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { RiAddCircleLine, RiDeleteBin2Fill, RiPencilFill } from "react-icons/ri";
 import { ListLocationContext } from "../api/ListLocationContext";
 import { ConfirmContext } from "../context/ConfirmContext";
@@ -7,6 +7,7 @@ import { EditContext } from "../context/EditContext";
 import { useDataFetcher } from "../hooks/useDataFetcher";
 import useGetStatistique from "../hooks/useGetStatistique";
 import { ButtonPagination } from "../ui/components/button-pagination/ButtonPagination";
+import ConfirmModale from "../ui/components/confirm-modale/ConfirmModale";
 import { Container } from "../ui/components/container/Container";
 import DataEmpty from "../ui/components/data-empty/DataEmpty";
 import Loyer from "../ui/components/loyer/Loyer";
@@ -15,7 +16,7 @@ import { Spinner } from "../ui/design-system/spinner/Spinner";
 import { url_api } from "../utils/url_api";
 
 export default function Location() {
-  const { toggleOpen } = useContext(ConfirmContext);
+  const { toggleOpen, isConfirmDialog, toggleConfirmDialog } = useContext(ConfirmContext);
   const { showListById } = useContext(ListLocationContext);
   const { toggleEdit } = useContext(EditContext);
 
@@ -38,6 +39,7 @@ export default function Location() {
     axios.delete(`${url_api}/locations/${id}`).then(() => {
       refetch();
       fetchStatistics();
+      toggleConfirmDialog();
     });
   };
 
@@ -50,6 +52,8 @@ export default function Location() {
   useEffect(() => {
     fetchStatistics();
   }, [refetch]);
+
+  const refIdLocation = useRef();
 
   if (isLoading)
     return (
@@ -99,7 +103,11 @@ export default function Location() {
                     <td>{value.nb_jours * value.taux_journalier}</td>
                     <td className="flex items-center justify-center py-2 text-3xl gap-2 max-sm:text-2xl">
                       <RiPencilFill onClick={() => { handleClicEdit(value.id) }} className="text-alert-warning cursor-pointer" />
-                      <RiDeleteBin2Fill onClick={() => { deleteLocation(value.id) }} className="text-alert-danger cursor-pointer" />
+                      <RiDeleteBin2Fill onClick={() => {
+                        refIdLocation.current = value.id;
+                        toggleConfirmDialog();
+                      }}
+                        className="text-alert-danger cursor-pointer" />
                     </td>
                   </tr>
                 )
@@ -124,6 +132,15 @@ export default function Location() {
       </div>
 
       <Formulaire refetch={refetch} fetchStatistics={fetchStatistics} />
+
+      {isConfirmDialog && (
+        <ConfirmModale
+          message="Vous êtes sur le point de supprimer cette location, voulez vous continuez ?"
+          action={() => {
+            deleteLocation(refIdLocation.current);
+          }}
+        />
+      )}
     </Container>
   );
 }
