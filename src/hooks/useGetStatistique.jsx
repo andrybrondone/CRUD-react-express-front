@@ -9,9 +9,11 @@ export default function useGetStatistique(refetchTrigger) {
 
   const fetchStatistics = () => {
     axios.get(`${url_api}/locations/statistic`).then((res) => {
-      setMinLoyer(res.data.min)
-      setMaxLoyer(res.data.max)
-      setTotalLoyer(res.data.total)
+      if (res.data.min || res.data.max || res.data.total) {
+        setMinLoyer(res.data.min)
+        setMaxLoyer(res.data.max)
+        setTotalLoyer(res.data.total)
+      }
     });
   };
 
