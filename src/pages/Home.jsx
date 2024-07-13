@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import img1 from "../assets/1.svg";
 import { Container } from "../ui/components/container/Container";
 
@@ -5,7 +6,7 @@ export const Home = () => {
 
   return (
     <div className="py-8">
-      <Container className="flex items-center justify-evenly max-md:flex-col max-md:gap-3">
+      <Container className="flex items-center justify-evenly max-md:flex-col-reverse max-md:gap-3">
         <div className="max-w-2xl max-lg:w-[400px] max-md:w-full max-md:text-center max-md:flex max-md:flex-col max-md:items-center space-y-7">
           <h1
             className="max-w-lg text-7xl dark:text-white max-lg:text-5xl"
@@ -22,8 +23,10 @@ export const Home = () => {
             </p>
           </div>
           <div className="space-x-5 pt-2.5">
-            <button className="p-3 bg-primary dark:bg-primary-400 text-white hover:bg-primary-400 rounded">Commencer</button>
-            <button className="p-3 text-primary rounded border border-primary dark:text-white dark:border-gray-700 dark:hover:shadow-darkgray">
+            <Link to="/locations">
+              <button className="p-3 bg-primary dark:bg-primary-400 text-white hover:bg-primary-400 rounded">Commencer</button>
+            </Link>
+            <button className="p-3 cursor-default text-primary rounded border border-primary dark:text-white dark:border-gray-700 dark:hover:shadow-darkgray">
               En savoir plus
             </button>
           </div>

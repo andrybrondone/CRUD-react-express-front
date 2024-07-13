@@ -108,7 +108,7 @@ export default function Formulaire({ refetch, fetchStatistics }) {
 
           <div className="anim-transition fixed top-0 left-0 w-full h-[100vh] bg-gray/10" onClick={handleClicEdit}></div>
 
-          <div id="modal-confirm" className="fixed w-[550px] max-sm:w-[90%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray rounded shadow-xl p-6 z-10">
+          <div id="modal-confirm" className="absolute w-[550px] max-sm:w-[90%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray rounded shadow-xl p-6 z-10">
 
             <RiCloseFill className="text-xl bg-gray-500 rounded-full absolute top-2 right-2 cursor-pointer dark:bg-gray-800" onClick={handleClicEdit} />
 
