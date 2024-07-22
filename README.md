@@ -8,4 +8,4 @@
 
 # Pour un live démo
 
-- Voici le lien de l'hébergement : https://sipmle-crud.web.app/
+- Voici le lien de l'hébergement : (https://crud-location.web.app/)
